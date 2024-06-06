@@ -1,0 +1,28 @@
+{% extends "MyApp/base.html" %}
+
+{% block body_block %}
+<h2 class="text-center">Musicians</h2>
+<table class="table table-striped table-hover">  <thead>
+    <tr>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Instrument</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for musician in musician_list %}
+      <tr>
+        <td>{{ musician.first_name }}</td>
+        <td>{{ musician.last_name }}</td>
+        <td>{{ musician.instrument }}</td>
+        <td> <a class="btn btn-sm btn-primary" href="{% url "my_app:update_musician" pk=musician.pk %}"> EDIT</a>  <a class="btn btn-sm btn-danger" href="{% url "my_app:delete_musician" pk=musician.pk %}"> DELETE</a></td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if not musician_list %}  <p>No musicians found.</p>
+{% endif %}
+
+{% endblock body_block %}
